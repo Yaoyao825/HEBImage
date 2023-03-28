@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * image(Image)表数据库访问层
+ * image(Image)accesses by database
  *
  * @author lydia.zhang
  * @since 2023-03-26 14:27:53
@@ -13,10 +13,10 @@ import java.util.List;
 public interface ImageDao {
 
     /**
-     * 通过ID查询单条数据
+     * use id to search in database
      *
-     * @param id 主键
-     * @return 实例对象
+     * @param id primary key
+     * @return object
      */
     Image queryById(Integer id);
 
