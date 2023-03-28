@@ -15,13 +15,29 @@ GET /images/{imageId}
 POST /images
 • Posts a JSON request object which must include an base64 encoded image (no Data URI Scheme) or URL. The request may also include an optional label for the image, and an optional field to enable object detection. • Returns a HTTP 200 OK with a JSON response body including image details for the created image.
 
-Requirements
+## Requirements
+
+
 Java
+
+
 Maven
+
+
 Database(I used MySQL Workbench)
+
+
 Postman
 
-Steps
+## Steps
+
+
 Clone project
+
+
 Run the image.sql
+
+
 Use Postman to call different API endpoints
+
+
