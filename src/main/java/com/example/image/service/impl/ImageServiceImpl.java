@@ -58,7 +58,8 @@ public class ImageServiceImpl implements ImageService {
     public Image insert(ImageRequest imageRequest) {
         Image image = new Image();
         if (imageRequest.getIdentificationPicture() != null && !imageRequest.getIdentificationPicture()) {
-            //todo 根据文档说的，调用google的api去识别是图片是什么
+            //Image object detection can be performed using any API
+            /**
             try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
                 byte[] data = Files.readAllBytes(Paths.get(imageRequest.getImageUrl()));
                 Image img = Image.newBuilder().setContent(ByteString.copyFrom(data)).build();
@@ -78,7 +79,7 @@ public class ImageServiceImpl implements ImageService {
                 image.setImageObjects(objects.toString());
             } catch (Exception e) {
                 // Handle exception
-            }
+            } */
         }
         image.setImageLabel(imageRequest.getImageLabel());
         image.setImageUrl(imageRequest.getImageUrl());
