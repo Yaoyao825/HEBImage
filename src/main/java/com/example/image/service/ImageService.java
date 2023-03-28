@@ -25,7 +25,7 @@ public interface ImageService {
     List<Image> queryAll();
 
     /**
-     * 新增数据
+     * newly added data
      *
      * @param image object
      * @return object
