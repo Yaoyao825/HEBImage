@@ -4,7 +4,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * image(Image)实体类
+ * image(Image)entity
  *
  * @author lydia.zhang
  * @since 2023-03-26 14:27:52
