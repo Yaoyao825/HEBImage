@@ -34,7 +34,7 @@
             <version>2.0.1</version>
         </dependency>
 
-        <!-- mysql 驱动-->
+        <!-- mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -48,6 +48,7 @@
             <version>1.18.22</version>
         </dependency>
 
+        <!-- Google API-->     
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-vision</artifactId>
