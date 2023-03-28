@@ -38,6 +38,6 @@ Clone project
 Run the image.sql
 
 
-Use Postman to call different API endpoints
+Use Postman Collection in Postman to call different API endpoints
 
 
