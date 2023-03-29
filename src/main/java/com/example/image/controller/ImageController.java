@@ -44,7 +44,7 @@ public class ImageController {
     }
 
     @PostMapping("images")
-    public ResponseEntity<Image> postImage(@RequestBody ImageRequest request) {
+    public ResponseEntity<Image> postImage(@RequestBody ImageRequest request) throws ServiceUnavailableException, IOException {
         Image image = imageService.insert(request);
         return ResponseEntity.ok(image);
     }
