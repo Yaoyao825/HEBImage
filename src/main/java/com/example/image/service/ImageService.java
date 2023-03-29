@@ -3,8 +3,9 @@ package com.example.image.service;
 import com.example.image.entity.Image;
 import com.example.image.request.ImageRequest;
 
+import javax.naming.ServiceUnavailableException;
+import java.io.IOException;
 import java.util.List;
-
 /**
  * image(Image)service
  *
