@@ -4,20 +4,23 @@ import com.example.image.dao.ImageDao;
 import com.example.image.entity.Image;
 import com.example.image.request.ImageRequest;
 import com.example.image.service.ImageService;
-//import com.google.cloud.vision.v1.AnnotateImageRequest;
-//import com.google.cloud.vision.v1.AnnotateImageResponse;
-//import com.google.cloud.vision.v1.EntityAnnotation;
-//import com.google.cloud.vision.v1.Feature;
-//import com.google.cloud.vision.v1.ImageAnnotatorClient;
-//import com.google.protobuf.ByteString;
+import com.google.cloud.vision.v1.AnnotateImageRequest;
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.EntityAnnotation;
+import com.google.cloud.vision.v1.Feature;
+import com.google.cloud.vision.v1.ImageAnnotatorClient;
+import com.google.protobuf.ByteString;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 /**
  * image(Image)service implementation
  *
@@ -54,44 +57,37 @@ public class ImageServiceImpl implements ImageService {
      * @return object
      */
     @Override
-    public Image insert(ImageRequest imageRequest) {
-        //try {
-            Image image = new Image();
-            if (imageRequest.getIdentificationPicture() != null && !imageRequest.getIdentificationPicture()) {
-                /*try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
-                    byte[] data = Files.readAllBytes(Paths.get(imageRequest.getImageUrl()));
-                    Image img = Image.newBuilder().setContent(ByteString.copyFrom(data)).build();
-                    Feature feat = Feature.newBuilder().setType(Feature.Type.LABEL_DETECTION).build();
-                    AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
-                    AnnotateImageResponse response = vision.annotateImage(request);
+    public Image insert(ImageRequest imageRequest) throws IOException {
+        Image image = new Image();
+        if (imageRequest.getIdentificationPicture() != null && !imageRequest.getIdentificationPicture()) {
+            try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
+                byte[] data = Files.readAllBytes(Paths.get(imageRequest.getImageUrl()));
+                com.google.cloud.vision.v1.Image img = com.google.cloud.vision.v1.Image.newBuilder().setContent(ByteString.copyFrom(data)).build();
+                Feature feat = Feature.newBuilder().setType(Feature.Type.LABEL_DETECTION).build();
+                AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+                List<AnnotateImageRequest> requests = new ArrayList<>();
+                requests.add(request);
+                AnnotateImageResponse response = vision.batchAnnotateImages(requests).getResponsesList().get(0);
 
-                    StringBuilder objects = new StringBuilder();
-                    for (EntityAnnotation annotation : response.getLabelAnnotationsList()) {
-                        objects.append(annotation.getDescription()).append(",");
-                    }
+                StringBuilder objects = new StringBuilder();
+                for (EntityAnnotation annotation : response.getLabelAnnotationsList()) {
+                    objects.append(annotation.getDescription()).append(",");
+                }
 
-                    if (objects.length() > 0) {
-                        objects.deleteCharAt(objects.length() - 1);
-                    }
+                if (objects.length() > 0) {
+                    objects.deleteCharAt(objects.length() - 1);
+                }
 
-                    image.setImageObjects(objects.toString());
-                } catch (IOException | ApiException e) {
-                    // Handle API exception
-                    throw new ServiceUnavailableException("Unable to process image at this time");
-                }*/
+                image.setImageUrl(objects.toString());
             }
+        } else {
             image.setImageLabel(imageRequest.getImageLabel());
-            image.setImageUrl(imageRequest.getImageUrl());
-            image.setCreateTime(new Date());
-            this.imageDao.insert(image);
-            return image;
-        /*} catch (DataAccessException e) {
-            // Handle database exception
-            throw new InternalServerErrorException("Unable to save image at this time");
-        } catch (Exception e) {
-            // Handle other exceptions
-            throw new ClientErrorException("Invalid request parameters", Response.Status.BAD_REQUEST);
-        }*/
+        }
+        image.setImageLabel(imageRequest.getImageLabel());
+        image.setImageUrl(imageRequest.getImageUrl());
+        image.setCreateTime(new Date());
+        this.imageDao.insert(image);
+        return image;
     }
 
 
@@ -103,3 +99,4 @@ public class ImageServiceImpl implements ImageService {
     }
 
 }
+
