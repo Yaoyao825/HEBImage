@@ -48,11 +48,12 @@
             <version>1.18.22</version>
         </dependency>
 
-        <!-- Google API-->     
+        <!-- Google API-->
+        <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-vision -->
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-vision</artifactId>
-            <version>${google.cloud.version}</version>
+            <version>3.10.0</version>
         </dependency>
 
         <dependency>
