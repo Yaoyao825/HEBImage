@@ -7,7 +7,10 @@ import com.example.image.service.ImageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.naming.ServiceUnavailableException;
+import java.io.IOException;
 import java.util.List;
+
 
 /**
  * image(Image) control layer
