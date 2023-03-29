@@ -32,9 +32,6 @@ MyBatis
 
 Database(I used MySQL Workbench)
 
-
-Postman
-
 ## Steps
 
 
@@ -42,6 +39,9 @@ Clone project
 
 
 Run the image.sql
+
+
+Run ImageApplication
 
 
 Use Postman Collection in Postman to call different API endpoints
