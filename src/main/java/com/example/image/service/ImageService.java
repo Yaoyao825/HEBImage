@@ -30,8 +30,7 @@ public interface ImageService {
      * @param image object
      * @return object
      */
-    Image insert(ImageRequest image);
-
+    Image insert(ImageRequest image) throws ServiceUnavailableException, IOException;
 
 
     List<Image> selectByLabelList(String objects);
